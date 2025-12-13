@@ -9,8 +9,15 @@ import java.awt.Color;
  */
 public class Editor2 {
 
+
 	public static void main (String[] args){
-		//// Replace this comment with your code.
-		//// This function is similar to the main function of Editor1.java			
+		String name = args[0];
+		int newWidth = Integer.parseInt(args[1]);
+		int newHeight = Integer.parseInt(args[2]);	// reads input
+
+		Color[][] scaledImage = Runigram.scaled(Runigram.read(name), newWidth, newHeight); // scales image
+		Runigram.setCanvas(scaledImage); // creates canvas
+		Runigram.display(scaledImage); // displays scaled image
+		
 	}
 }
