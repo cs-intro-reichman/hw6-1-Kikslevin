@@ -129,14 +129,7 @@ public class Runigram {
 		Color[][] gray = new Color[image.length][image[0].length];
 		for (int i = 0; i < image.length; i++) {
 			for (int j = 0; j < image[0].length; j++) {
-				Color pixel = image[i][j];
-				int R = pixel.getRed();
-				int G = pixel.getGreen();
-				int B = pixel.getBlue();
-			
-			int lumi = (int) Math.round(0.299 * R + 0.587 * G + 0.114 * B);
-
-			gray[i][j] = new Color(lumi, lumi, lumi);
+				gray[i][j] = luminance(image[i][j]);
 			}
 		}
 		return gray;
@@ -166,22 +159,16 @@ public class Runigram {
 	 * v = alpha * v1 + (1 - alpha) * v2, where v1 and v2 are the corresponding r, g, b
 	 * values in the two input color.
 	 */
-	public static int clamp(int v){
-		if (v < 0) return 0;
-		if (v > 255) return 255;
-
-		return v;
-	}
 
 	public static Color blend(Color c1, Color c2, double alpha) {
-
+		alpha = Math.max(0, Math.min(1, alpha));
 			int r = (int) Math.round(alpha * c1.getRed() + (1 - alpha) * c2.getRed());
 			int g = (int) Math.round(alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
 			int b = (int) Math.round(alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
 
-			r = clamp(r);
-			g = clamp(g);
-			b = clamp(b);
+			r = Math.max(0, Math.min(255, r));
+			g = Math.max(0, Math.min(255, g));
+			b = Math.max(0, Math.min(255, b));
 
 		return new Color(r, g, b);
 	}
@@ -193,6 +180,7 @@ public class Runigram {
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
 		Color[][] blendedImage = new Color[image1.length][image1[0].length];
+		alpha = Math.max(0, Math.min(1, alpha));
 		for (int i = 0; i < image1.length; i++) {	
 			for (int j = 0; j < image1[0].length; j++) {
 				blendedImage[i][j] = blend(image1[i][j], image2[i][j], alpha);
