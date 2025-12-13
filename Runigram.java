@@ -136,7 +136,7 @@ public class Runigram {
 			
 			int lumi = (int) Math.round(0.299 * R + 0.587 * G + 0.114 * B);
 
-			gray[i][j] = new Color (lumi, lumi, lumi);
+			gray[i][j] = new Color(lumi, lumi, lumi);
 			}
 		}
 		return gray;
@@ -166,27 +166,25 @@ public class Runigram {
 	 * v = alpha * v1 + (1 - alpha) * v2, where v1 and v2 are the corresponding r, g, b
 	 * values in the two input color.
 	 */
-	public static Color blend(Color[][] image, Color c1, Color c2, double alpha) {
-		int height = image.length;
-		int width = image[0].length;
+	public static int clamp(int v){
+		if (v < 0) return 0;
+		if (v > 255) return 255;
 
-		Color[][] blendedColor = new Color[height][width];
-
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < height; j++) {
-				c1 = image[i][j];
-				c2 = image[i][j];
-
-			(int) Math.round(alpha * c1.getRed() + (1 - alpha) * c2.getRed()),
-			(int) Math.round(alpha * c1.getGreen() + (1 - alpha) * c2.getGreen()),
-			(int) Math.round(alpha * c1.getBlue() + (1 - alpha) * c2.getBlue())
-			
-			blendedColor[i][j] = new Color (r, g, b);
-			}
-		}
-		return blendedColor;
+		return v;
 	}
-	
+
+	public static Color blend(Color c1, Color c2, double alpha) {
+
+			int r = (int) Math.round(alpha * c1.getRed() + (1 - alpha) * c2.getRed());
+			int g = (int) Math.round(alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
+			int b = (int) Math.round(alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
+
+			r = clamp(r);
+			g = clamp(g);
+			b = clamp(b);
+
+		return new Color(r, g, b);
+	}
 	/**
 	 * Cosntructs and returns an image which is the blending of the two given images.
 	 * The blended image is the linear combination of (alpha) part of the first image
