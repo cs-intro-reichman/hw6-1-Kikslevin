@@ -118,7 +118,7 @@ public class Runigram {
 		int r = pixel.getRed();
 		int g = pixel.getGreen();
 		int b = pixel.getBlue();
-		int lum = (int) Math.round(0.299 * r + 0.587 * g + 0.114 * b);
+		int lum = (int) (0.299 * r + 0.587 * g + 0.114 * b);
 		return new Color(lum, lum, lum);
 	}
 	
@@ -162,9 +162,9 @@ public class Runigram {
 
 	public static Color blend(Color c1, Color c2, double alpha) {
 		alpha = Math.max(0, Math.min(1, alpha));
-			int r = (int) Math.round(alpha * c1.getRed() + (1 - alpha) * c2.getRed());
-			int g = (int) Math.round(alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
-			int b = (int) Math.round(alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
+			int r = (int) (alpha * c1.getRed() + (1 - alpha) * c2.getRed());
+			int g = (int) (alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
+			int b = (int) (alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
 
 			r = Math.max(0, Math.min(255, r));
 			g = Math.max(0, Math.min(255, g));
