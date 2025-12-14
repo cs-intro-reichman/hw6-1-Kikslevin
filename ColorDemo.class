@@ -1,0 +1,38 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+import java.awt.Color;
+
+public class ColorDemo {
+   public ColorDemo() {
+   }
+
+   public static void main(String[] var0) {
+      Color var1 = new Color(0, 0, 0);
+      Color var2 = new Color(255, 255, 255);
+      Color var3 = new Color(255, 0, 0);
+      Color var4 = new Color(255, 255, 0);
+      System.out.println("RGB values of yellow:");
+      System.out.println("R = " + var4.getRed());
+      System.out.println("G = " + var4.getGreen());
+      System.out.println("B = " + var4.getBlue());
+      System.out.print("Red = ");
+      print(var3);
+      System.out.println();
+      Color[] var5 = new Color[]{var1, var2, var1, var2};
+
+      for(int var6 = 0; var6 < var5.length; ++var6) {
+         print(var5[var6]);
+      }
+
+      System.out.println();
+      Color[] var10000 = new Color[]{new Color(0, 0, 0), new Color(255, 255, 255), new Color(255, 255, 255), new Color(0, 0, 0)};
+      Color[][] var8 = new Color[][]{{var1, var2, var1, var2}, {var2, var1, var2, var1}, {var1, var2, var1, var2}, {var2, var1, var2, var1}};
+   }
+
+   public static void print(Color var0) {
+      System.out.print("(");
+      System.out.printf("%3s,", var0.getRed());
+      System.out.printf("%3s,", var0.getGreen());
+      System.out.printf("%3s", var0.getBlue());
+      System.out.print(")  ");
+   }
+}
